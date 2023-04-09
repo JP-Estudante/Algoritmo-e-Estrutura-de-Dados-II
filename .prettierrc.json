@@ -1,0 +1,28 @@
+{
+    "tabWidth": 4,
+    "useTabs": false,
+    "printWidth": 80,
+    "trailingComma": "all",
+    "semi": true,
+    "singleQuote": false,
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "endOfLine": "auto",
+    "overrides": [
+        {
+            "files": "*.c",
+            "options": {
+                "tabWidth": 4,
+                "useTabs": false,
+                "printWidth": 80,
+                "trailingComma": "all",
+                "semi": true,
+                "singleQuote": false,
+                "bracketSpacing": true,
+                "arrowParens": "always",
+                "endOfLine": "auto",
+                "braceSameLine": true
+            }
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.java": "java",
+        "*.c": "c",
+        "locale.h": "c",
+        "stdio.h": "c"
+    }
+}
