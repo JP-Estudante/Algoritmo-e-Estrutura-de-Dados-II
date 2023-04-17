@@ -1,3 +1,8 @@
+/*Crie uma pilha de inteiros com capacidade para armazenar até 10 elementos. 
+Implemente funções para inserir um elemento no topo da pilha (push), 
+remover o elemento do topo da pilha (pop), verificar se a pilha está vazia (isEmpty) 
+e imprimir todos os elementos da pilha.*/
+
 #include <stdio.h>
 #include <locale.h>
 
@@ -52,8 +57,8 @@ int pop(Pilha *p)
         printf("Pilha vazia\n"); // imprime uma mensagem de erro
         return -1;
     }
-    int elemento = p->inteiros[p->topo--]; // remove o elemento do topo da pilha
-    return elemento;                       // retorna o elemento removido
+    int inteiro = p->inteiros[p->topo--]; // remove o elemento do topo da pilha
+    return inteiro;                       // retorna o elemento removido
 }
 
 int isEmpty(Pilha *p)
