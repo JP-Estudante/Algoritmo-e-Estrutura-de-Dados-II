@@ -26,22 +26,35 @@ void printList(Node* head){ //função para exibir os itens da lista
     }
 }
 
+int removeNode(Node** head){
+    Node* oldHead = *head;
 
+    int value = oldHead->value; //buscando o valor do registro a ser apagado
+    *head = oldHead->next; //setando o proximo elemento como o nó inicial
+
+    free(oldHead);//liberando a memória
+    return value;
+}
 
 int main(){
 
-    Node* head = NULL;
+    Node* head = NULL; //iniciando a lista vazia
 
     insertNode(30, &head);
-    printf("Lista: ");
-    printList(head);
-    printf("\n");
 
     insertNode(60, &head);
-    printList(head);
-    printf("\n");
 
     insertNode(90, &head);
+
+    printf("Lista: ");
     printList(head);
-    printf("\n");
+    
+    int removeValue = removeNode(head);
+    
+    printf("[AVISO] O %d foi removido", removeValue);
+
+    printf("Lista Atual\n");
+    printList(head);
+
+    return 0;
 }
