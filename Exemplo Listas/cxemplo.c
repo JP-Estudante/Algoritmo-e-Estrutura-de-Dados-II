@@ -26,6 +26,8 @@ void printList(Node* head){ //função para exibir os itens da lista
     }
 }
 
+
+
 int main(){
 
     Node* head = NULL;
