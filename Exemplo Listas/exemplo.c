@@ -1,13 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Node {
+typedef struct
+{
     int value;
-    struct Node* next;
+    struct Node *next;
+
 } Node;
 
-void insertNode(int value, Node** head) {
-    Node* newNode = (Node*) malloc(sizeof(Node));
+void insertNode(int value, Node **head)
+{
+    Node *newNode = (Node *)malloc(sizeof(Node));
 
     newNode->value = value;
     newNode->next = *head;
@@ -15,35 +18,33 @@ void insertNode(int value, Node** head) {
     *head = newNode; // deixando como primeiro elemento da lista
 }
 
-void printList(Node* head) { // função para exibir os itens da lista
-    Node* current = head;
+void printList(Node *head)
+{ // função para exibir os itens da lista
+    Node *current = head;
 
-    while (current != NULL) {
-        printf("%d ", current->value); // exibindo o item da lista
+    while (current != NULL)
+    {
+        printf("%d", current->value); // exibindo o item da lista
 
-        current = current->next; // indo para o próximo item da lista
+        current = current->next; // indo para o proximo item da lista
     }
-    printf("\n"); // adicionando nova linha para formatação
 }
 
-int removeNode(Node** head) {
-    if (*head == NULL) {
-        printf("[ERRO] Lista vazia\n");
-        return -1; // retornando valor de erro
-    }
-
-    Node* oldHead = *head;
+int removeNode(Node **head)
+{
+    Node *oldHead = *head;
 
     int value = oldHead->value; // buscando o valor do registro a ser apagado
-    *head = oldHead->next;      // setando o próximo elemento como o nó inicial
+    *head = oldHead->next;      // setando o proximo elemento como o nó inicial
 
     free(oldHead); // liberando a memória
     return value;
 }
 
-int main() {
+int main()
+{
 
-    Node* head = NULL; // iniciando a lista vazia
+    Node *head = NULL; // iniciando a lista vazia
 
     insertNode(30, &head);
 
@@ -54,13 +55,11 @@ int main() {
     printf("Lista: ");
     printList(head);
 
-    int removeValue = removeNode(&head);
+    int removeValue = removeNode(head);
 
-    if (removeValue != -1) { // verificando se a remoção foi bem sucedida
-        printf("[AVISO] O %d foi removido\n", removeValue);
-    }
+    printf("[AVISO] O %d foi removido", removeValue);
 
-    printf("Lista Atual: ");
+    printf("Lista Atual\n");
     printList(head);
 
     return 0;
