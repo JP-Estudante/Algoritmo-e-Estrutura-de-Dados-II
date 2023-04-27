@@ -151,8 +151,8 @@ int main()
 
     // inserindo dados na lista
     head = insertBeginnig(head, 10);
-    head = insertBeginnig(head, 20);
-    head = insertBeginnig(head, 30);
+    head = insertEnd(head, 20);
+    head = insertEnd(head, 30);
 
     printf("Lista: ");
     printList(head);
