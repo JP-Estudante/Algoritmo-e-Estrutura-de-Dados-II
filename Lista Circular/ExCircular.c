@@ -152,12 +152,14 @@ int main()
     // inserindo dados na lista
     head = insertBeginnig(head, 10);
     head = insertBeginnig(head, 20);
+    head = insertBeginnig(head, 30);
 
     printf("Lista: ");
     printList(head);
 
-    head = insertBeginnig(head, 30);
-
+    printf("Removendo Elemento");
+    head = removeNode(head, 10);
+    
     printf("Lista: ");
     printList(head);
 
