@@ -7,22 +7,22 @@ typedef struct
     struct Node *next;
 } Node;
 
-// função que cria inicializa a lista
+// fun??o que cria inicializa a lista
 Node *createList()
 {
     return NULL;
 }
 
-// Função que verificará se a lista esta vazia
+// Fun??o que verificar? se a lista esta vazia
 int is_empty(Node *head)
 {
     return head == NULL;
 }
 
-// Função que cria um novo nó no inicio da lista
+// Fun??o que cria um novo n? no inicio da lista
 Node *insertBeginnig(Node *head, int data)
 {
-    // Alocando memória
+    // Alocando mem?ria
     Node *newNode = (Node *)malloc(sizeof(Node));
     newNode->data = data;
 
@@ -33,7 +33,7 @@ Node *insertBeginnig(Node *head, int data)
     }
     else
     {
-        // Se a lista não for vazia
+        // Se a lista n?o for vazia
         Node *last = head;
         while (last->next != head)
         {
@@ -64,7 +64,7 @@ void printList(Node *head)
     }
 }
 
-// Função para criação de item no final da lista
+// Fun??o para cria??o de item no final da lista
 Node *insertEnd(Node *head, int data)
 {
     Node *newNode = (Node *)malloc(sizeof(Node));
@@ -88,25 +88,25 @@ Node *insertEnd(Node *head, int data)
     return head;
 }
 
-// função que remove um item da lista
+// fun??o que remove um item da lista
 
 Node *removeNode(Node *head, int data)
 {
     if (is_empty(head))
     {
-        printf("A lista já esta vazia");
+        printf("A lista j? esta vazia");
         return head;
     }
-    // Removendo o único registro da lista
+    // Removendo o ?nico registro da lista
     else if (head->data == data && head->next == head)
     {
         free(head);
         return NULL;
     }
-    // Remoção de um nó no inicio ou no meio da lista
+    // Remo??o de um n? no inicio ou no meio da lista
     else
     {
-        // buscar o nó no inicio oi no meio da lista
+        // buscar o n? no inicio oi no meio da lista
         Node *previous = head;
         Node *current = head->next;
 
@@ -118,11 +118,11 @@ Node *removeNode(Node *head, int data)
 
         if (current == head && current->data != data)
         {
-            printf("O valor solicitado não foi encontrado");
+            printf("O valor solicitado n?o foi encontrado");
             return head;
         }
 
-        // Se o nó é o primeiro da lista
+        // Se o n? ? o primeiro da lista
         else if (current == head)
         {
             Node *last = head;
@@ -134,7 +134,7 @@ Node *removeNode(Node *head, int data)
             head = head->next;
             last->next = head;
         }
-        // Remove o nó da lista
+        // Remove o n? da lista
         else
         {
             previous->next = current->next;
@@ -159,7 +159,7 @@ int main()
 
     printf("Removendo Elemento");
     head = removeNode(head, 10);
-    
+
     printf("Lista: ");
     printList(head);
 
