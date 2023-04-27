@@ -151,17 +151,15 @@ int main()
 
     // inserindo dados na lista
     head = insertBeginnig(head, 10);
-
-    printf("Lista: ");
-    printList(head);
-
     head = insertBeginnig(head, 20);
 
     printf("Lista: ");
     printList(head);
 
-    head = insertBeginnig(head, 20);
+    head = insertBeginnig(head, 30);
 
     printf("Lista: ");
     printList(head);
+
+    return 0;
 }
