@@ -1,28 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct
+typedef struct Node
 {
     int data;
     struct Node *next;
 } Node;
 
-// fun??o que cria inicializa a lista
+// função que cria inicializa a lista
 Node *createList()
 {
     return NULL;
 }
 
-// Fun??o que verificar? se a lista esta vazia
+// Função que verifica se a lista está vazia
 int is_empty(Node *head)
 {
     return head == NULL;
 }
 
-// Fun??o que cria um novo n? no inicio da lista
-Node *insertBeginnig(Node *head, int data)
+// Função que cria um novo nó no início da lista
+Node *insertBeginning(Node *head, int data)
 {
-    // Alocando mem?ria
+    // Alocando memória
     Node *newNode = (Node *)malloc(sizeof(Node));
     newNode->data = data;
 
@@ -33,7 +33,7 @@ Node *insertBeginnig(Node *head, int data)
     }
     else
     {
-        // Se a lista n?o for vazia
+        // Se a lista não for vazia
         Node *last = head;
         while (last->next != head)
         {
@@ -41,10 +41,12 @@ Node *insertBeginnig(Node *head, int data)
         }
         newNode->next = head;
         last->next = newNode;
-        return newNode;
+        head = newNode; // atualiza o head da lista para o novo nó criado
+        return head;
     }
 }
 
+// Função que imprime a lista
 void printList(Node *head)
 {
     if (is_empty(head))
@@ -57,18 +59,19 @@ void printList(Node *head)
 
         do
         {
-            printf("%d", current->data);
+            printf("\n%d", current->data);
             current = current->next;
         } while (current != head);
         printf("\n");
     }
 }
 
-// Fun??o para cria??o de item no final da lista
+// Função para criação de item no final da lista
 Node *insertEnd(Node *head, int data)
 {
     Node *newNode = (Node *)malloc(sizeof(Node));
     newNode->data = data;
+
     if (is_empty(head))
     {
         newNode->next = newNode;
@@ -77,36 +80,34 @@ Node *insertEnd(Node *head, int data)
     else
     {
         Node *last = head;
+        while (last->next != head)
+        {
+            last = last->next;
+        }
+        newNode->next = head;
+        last->next = newNode;
+        return head;
     }
-    while (last->next != head)
-    {
-        last = last->next;
-    }
-
-    newNode->next = head;
-    last->next = newNode;
-    return head;
 }
 
-// fun??o que remove um item da lista
-
+// Função que remove um item da lista
 Node *removeNode(Node *head, int data)
 {
     if (is_empty(head))
     {
-        printf("A lista j? esta vazia");
+        printf("A lista já está vazia");
         return head;
     }
-    // Removendo o ?nico registro da lista
+    // Removendo o único registro da lista
     else if (head->data == data && head->next == head)
     {
         free(head);
         return NULL;
     }
-    // Remo??o de um n? no inicio ou no meio da lista
+    // Remoção de um nó no início ou no meio da lista
     else
     {
-        // buscar o n? no inicio oi no meio da lista
+        // buscar o nó no início ou no meio da lista
         Node *previous = head;
         Node *current = head->next;
 
@@ -118,11 +119,11 @@ Node *removeNode(Node *head, int data)
 
         if (current == head && current->data != data)
         {
-            printf("O valor solicitado n?o foi encontrado");
+            printf("O valor solicitado não foi encontrado");
             return head;
         }
 
-        // Se o n? ? o primeiro da lista
+        // Se o nó é o primeiro da lista
         else if (current == head)
         {
             Node *last = head;
@@ -134,7 +135,7 @@ Node *removeNode(Node *head, int data)
             head = head->next;
             last->next = head;
         }
-        // Remove o n? da lista
+        // Remove o nó da lista
         else
         {
             previous->next = current->next;
@@ -145,21 +146,25 @@ Node *removeNode(Node *head, int data)
     }
 }
 
+// comente o que é importante
 int main()
 {
     Node *head = createList();
 
     // inserindo dados na lista
-    head = insertBeginnig(head, 10);
+    head = insertBeginning(head, 10);
     head = insertEnd(head, 20);
     head = insertEnd(head, 30);
 
+    // Imprime a lista
     printf("Lista: ");
     printList(head);
 
-    printf("Removendo Elemento");
+    // Remove um elemento da lista
+    printf("\nRemovendo Elemento\n");
     head = removeNode(head, 10);
 
+    // Imprime a lista novamente
     printf("Lista: ");
     printList(head);
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct
+typedef struct Node
 {
     int value;
     struct Node *next;
@@ -24,7 +24,7 @@ void printList(Node *head)
 
     while (current != NULL)
     {
-        printf("%d", current->value); // exibindo o item da lista
+        printf("\n%d", current->value); // exibindo o item da lista
 
         current = current->next; // indo para o proximo item da lista
     }
@@ -55,7 +55,7 @@ int main()
     printf("Lista: ");
     printList(head);
 
-    int removeValue = removeNode(head);
+    int removeValue = removeNode(&head);
 
     printf("[AVISO] O %d foi removido", removeValue);
 
