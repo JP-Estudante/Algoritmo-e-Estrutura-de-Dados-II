@@ -3,6 +3,7 @@ de tamanho N e encontre o maior e o menor elemento do vetor
 utilizando ponteiros. Em seguida, imprima o maior e o menor
 elemento na tela.*/
 #include <stdio.h>
+#include <stdlib.h>
 #include <locale.h>
 
 // Função que busca o maior e o menor valor do vetor utilizando ponteiros
@@ -26,7 +27,7 @@ void buscaValor(int *pVetor, int tamanhoVet, int *maior, int *menor)
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
-    int i, tamanho = 0, menor, maior;
+    int tamanho = 0, i, menor, maior;
 
     printf("Qual é o tamanho do vetor? ");
     scanf("%d", &tamanho);
@@ -42,7 +43,7 @@ int main()
 
     buscaValor(vetor, tamanho, &menor, &maior); // chama a função buscaValor passando o vetor, seu tamanho e os endereços das variáveis menor e maior
 
-    printf("O maior: %d", maior); // imprime o valor do maior elemento do vetor
+    printf("O maior: %d", maior);   // imprime o valor do maior elemento do vetor
     printf("\nO menor: %d", menor); // imprime o valor do menor elemento do vetor
 
     return 0; // finaliza o programa
