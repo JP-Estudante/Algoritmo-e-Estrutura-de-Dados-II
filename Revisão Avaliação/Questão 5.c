@@ -1,3 +1,9 @@
+/*5 - Escreva um programa em linguagem C que implemente uma lista simplesmente encadeada
+ para armazenar nomes de alunos. O programa deve permitir as seguintes operações:
+
+- Inserir um nome na lista;
+- Excluir um nome da lista;
+- Imprimir os nomes presentes na lista.*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -48,7 +54,7 @@ void excluirNome(Lista *lista, char *nome)
 {
     if (lista->head == NULL)
     {
-        printf("Lista vazia. Nenhum nome para excluir.\n");
+        printf("Lista vazia. Nenhum nome para excluir.\n\n");
         return;
     }
 
@@ -60,7 +66,6 @@ void excluirNome(Lista *lista, char *nome)
     {
         lista->head = current->next;
         free(current);
-        printf("Nome '%s' excluído com sucesso.\n", nome);
         return;
     }
 
@@ -71,7 +76,6 @@ void excluirNome(Lista *lista, char *nome)
         {
             previous->next = current->next;
             free(current);
-            printf("Nome '%s' excluído com sucesso.\n", nome);
             return;
         }
         previous = current;
@@ -91,7 +95,6 @@ void imprimirLista(Lista *lista)
     }
 
     Node *current = lista->head;
-    printf("Nomes na lista:\n");
     while (current != NULL)
     {
         printf("%s\n", current->nome);
@@ -114,18 +117,106 @@ void liberarLista(Lista *lista)
     lista->head = NULL;
 }
 
+int verificarNome(Lista *lista, char *nome)
+{
+    Node *current = lista->head;
+
+    while (current != NULL)
+    {
+        if (strcmp(current->nome, nome) == 0)
+        {
+            return 1; // O nome foi encontrado na lista
+        }
+        current = current->next;
+    }
+
+    // O nome não foi encontrado na lista
+    return 0;
+}
+
 int main()
 {
     setlocale(LC_ALL, "PORTUGUESE");
 
     Lista minhaLista;
     iniciarLista(&minhaLista);
+    int opcao;
+    char nome[50];
 
-    inserirNome(&minhaLista, "João");
-    inserirNome(&minhaLista, "Maria");
-    inserirNome(&minhaLista, "Pedro");
+    do
+    {
 
-    imprimirLista(&minhaLista);
+        printf("Menu de opções...");
+        printf("\n1 - Adicionar nomes a lista");
+        printf("\n2 - Remover nome da lista");
+        printf("\n3 - Exibir nome da lista");
+        printf("\n>>> ");
+        scanf("%d", &opcao);
+        getchar(); // Consumir o caractere de nova linha
 
-    excluirNome(&minhaLista, "Maria");
+        switch (opcao)
+        {
+        case 1:
+
+            printf("\nDigite 'r' para retornar ao menu!");
+            printf("\nDigite o nome: ");
+            fgets(nome, sizeof(nome), stdin);
+            nome[strcspn(nome, "\n")] = '\0'; // para remover o caracter de nova linha
+
+            while (strcmp(nome, "r") != 0)
+            {
+                inserirNome(&minhaLista, nome);
+
+                printf("\nDigite o nome: ");
+                fgets(nome, sizeof(nome), stdin);
+                nome[strcspn(nome, "\n")] = '\0'; // para remover o caracter de nova linha
+            }
+            printf("\n");
+            system("pause");
+            system("cls");
+            break;
+
+        case 2:
+            printf("\nDigite 'r' para retornar ao menu!");
+            printf("\nNome a excluir: ");
+            fgets(nome, sizeof(nome), stdin);
+            nome[strcspn(nome, "\n")] = '\0'; // para remover o caracter de nova linha
+
+            if (strcmp(nome, "r") == 0)
+            {
+                printf("Retornando ao menu...\n");
+                printf("\n");
+                system("pause");
+                system("cls");
+                break;
+            }
+
+            if (verificarNome(&minhaLista, nome))
+            {
+                excluirNome(&minhaLista, nome);
+                printf("Nome: '%s' excluído.\n", nome);
+                printf("\n");
+                system("pause");
+                system("cls");
+            }
+            else
+            {
+                printf("O nome '%s' não foi encontrado na lista.\n", nome);
+                printf("\n");
+                system("pause");
+                system("cls");
+            }
+            break;
+
+        case 3:
+            printf("\n**Nomes na Lista**\n");
+            imprimirLista(&minhaLista);
+
+            printf("\n");
+            system("pause");
+            system("cls");
+
+            break;
+        }
+    } while (opcao != 0);
 }
