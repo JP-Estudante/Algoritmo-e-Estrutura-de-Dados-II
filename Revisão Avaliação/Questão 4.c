@@ -4,100 +4,137 @@ insira um número na pilha, desempilhe o último número inserido e imprima todos o
 números armazenados na pilha.*/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <locale.h>
 
 #define MAX 100
 
-typedef struct Pilha
+typedef struct
 {
-    int topo;       // índice do topo da pilha
-    int itens[MAX]; // vetor que armazena os itens da pilha
+    int topo;
+    int base[MAX];
 } Pilha;
 
-// Inicializa a pilha, definindo o topo como -1 (pilha vazia)
-void inicializarPilha(Pilha *pilha);
+void inicializandoPilha(Pilha *pilha)
+{
+    pilha->topo = -1; // pilha topo -1
+}
 
-// Insere um valor na pilha, incrementando o topo
-// Retorna 1 se a inserção foi bem sucedida, 0 caso contrário
-int empilharPilha(Pilha *pilha, int valor);
+int pilhaVazia(Pilha *pilha)
+{
+    return pilha->topo == -1;
+}
 
-// Remove o item no topo da pilha, decrementando o topo
-// Retorna o valor removido, ou -1 caso a pilha esteja vazia
-int desempilharPilha(Pilha *pilha);
+int pilhaCheia(Pilha *pilha)
+{
+    return pilha->topo == MAX - 1;
+}
 
-// Imprime todos os itens da pilha, a partir do topo
-void printPilha(Pilha *pilha);
+void empilhar(Pilha *pilha, int valor)
+{
+    if (pilhaCheia(pilha))
+        printf("[AVISO] A pilha está cheia");
+    else
+    {
+        // Adicionando valor a pilha
+        pilha->topo++;
+        pilha->base[pilha->topo] = valor;
+    }
+}
+
+int desempilhar(Pilha *pilha)
+{
+    if (pilhaVazia(pilha))
+    {
+        printf("[AVISO] A pilha está vazia");
+        return -1;
+    }
+    else
+    {
+        // Removendo o topo da pilha
+        int valor = pilha->base[pilha->topo];
+        pilha->topo--;
+
+        printf("[AVISO] %d desempilhado\n", valor);
+        return valor;
+    }
+}
+
+void imprimirPilha(Pilha *pilha)
+{
+    for (int i = 0; i <= pilha->topo; i++)
+    {
+        printf("%d ", pilha->base[i]);
+    }
+    printf("\n\n");
+}
 
 int main()
 {
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "PORTUGUESE");
 
-    Pilha pilha;
-    inicializarPilha(&pilha);
-    int opcao = 1;
-    int valor;
+    Pilha numero;
+    inicializandoPilha(&numero);
 
-    while (opcao != 0)
+    int opcao, valorInserido;
+
+    do
     {
-        printf("1 - Empilhar\n2 - Desempilhar\n0 - Sair\nEscolha uma opção: ");
+        printf("1 - Insira um numero");
+        printf("\n2 - Desempilhar topo");
+        printf("\n3 - Imprimir pilha");
+        printf("\n0 - Sair");
+        printf("\n>>> ");
         scanf("%d", &opcao);
 
         switch (opcao)
         {
         case 1:
-            printf("Digite um valor: ");
-            scanf("%d", &valor);
-            empilharPilha(&pilha, valor);
-            printPilha(&pilha);
+            printf("Insira um valor: ");
+            scanf("%d", &valorInserido);
+
+            empilhar(&numero, valorInserido);
+
+            printf("[AVISO] %d Empilhado\n\n", valorInserido);
+
+            system("pause");
+            system("cls");
             break;
+
         case 2:
-            valor = desempilharPilha(&pilha);
-            if (valor != -1)
+            valorInserido = desempilhar(&numero);
+
+            system("pause");
+            system("cls");
+            break;
+
+        case 3:
+            if (pilhaVazia(&numero))
             {
-                printf("Valor desempilhado: %d\n", valor);
-                printPilha(&pilha);
+                printf("[AVISO] A pilha está vazia\n\n");
+                system("pause");
+                system("cls");
             }
             else
             {
-                printf("A pilha está vazia!\n");
+                printf("***Pilha***\n\n");
+                imprimirPilha(&numero);
+
+                printf("\n\n");
+                system("pause");
+                system("cls");
             }
             break;
+
         case 0:
-            printf("Saindo...\n");
+            printf("[AVISO] Finalizando Programa!\n\n");
             break;
+
         default:
-            printf("Opção inválida!\n");
+            printf("[AVISO] Opção Inválida!\n\n");
+            system("pause");
+            system("cls");
         }
-    }
 
-    return 0;
-}
-
-void inicializarPilha(Pilha *pilha)
-{
-    pilha->topo = -1; // Inicializa o topo com -1 (pilha vazia)
-}
-
-int empilharPilha(Pilha *pilha, int valor)
-{
-    if (pilha->topo < MAX - 1) // Verifica se a pilha não está cheia
-    {
-        pilha->topo++;                     // Incrementa o topo
-        pilha->itens[pilha->topo] = valor; // Insere o valor no topo
-        return 1;                          // Retorna 1, indicando que a inserção foi bem sucedida
-    }
-    else
-    {
-        return 0; // Retorna 0, indicando que a pilha está cheia
-    }
-}
-
-void printPilha(Pilha *pilha) //Função para mostrar a pilha
-{
-    printf("\nPilha: ");
-    for (int i = pilha->topo; i >= 0; i--)
-    {
-        printf("%d ", pilha->itens[i]);
-    }
-    printf("\n");
+    } while (opcao != 0);
 }
