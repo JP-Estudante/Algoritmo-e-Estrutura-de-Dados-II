@@ -62,7 +62,8 @@ int main()
     setlocale(LC_ALL, "Portuguese");
 
     int nivel[] = {104, 91, 68, 136, 178, 20};
-    int tamanho = sizeof(nivel) / sizeof(nivel[0]);
+    int tamanho = sizeof(nivel) / sizeof(nivel[0]); // Dividir o tamanho total em bytes pelo tamanho de um
+                                                    // elemento individual dá o número de elementos no array
 
     printf("============================\n");
     printf("=== ScoreBoard do Jogo ===\n");
