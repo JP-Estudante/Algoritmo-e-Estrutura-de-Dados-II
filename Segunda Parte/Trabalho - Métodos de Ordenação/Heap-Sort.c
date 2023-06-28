@@ -1,5 +1,5 @@
 /*Para exemplificar o Método Heap Sort, eu elaborei um cenário onde irá
-ordenar o nivel de habilidade de um personagem de um jogo de video-game*/
+ordenar o nivel de conta de um personagem de um jogo de video-game*/
 
 /*Explicar o que são nós, pais, filhos, e folhas no Heap Binario*/
 
