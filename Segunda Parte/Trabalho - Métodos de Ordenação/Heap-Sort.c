@@ -21,10 +21,10 @@ void maxHeapify(int xp[], int tamanho, int i)
     int proximoJogadorEsquerda = 2 * i + 1;
     int proximoJogadorDireita = 2 * i + 2;
 
-    if (proximoJogadorEsquerda < tamanho && xp[proximoJogadorEsquerda] < xp[maior])
+    if (proximoJogadorEsquerda < tamanho && xp[proximoJogadorEsquerda] > xp[maior])
         maior = proximoJogadorEsquerda;
 
-    if (proximoJogadorDireita < tamanho && xp[proximoJogadorDireita] < xp[maior])
+    if (proximoJogadorDireita < tamanho && xp[proximoJogadorDireita] > xp[maior])
         maior = proximoJogadorDireita;
 
     if (maior != i)
